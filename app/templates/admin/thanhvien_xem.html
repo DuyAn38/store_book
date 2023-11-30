@@ -1,0 +1,51 @@
+
+{% extends 'admin/manage.html' %}
+{% load static %}
+
+{% block viewuser %}
+<style>
+    /* Tùy chỉnh CSS cho nút Quay lại */
+    .add-product-button {
+        background-color: #007bff; /* Màu nền nút */
+        color: #fff; /* Màu văn bản */
+        padding: 10px 20px; /* Kích thước nút (độ rộng và chiều cao) */
+        border: none; /* Loại bỏ viền */
+        border-radius: 5px; /* Bo tròn góc */
+        text-decoration: none; /* Loại bỏ gạch chân văn bản */
+        font-weight: bold; /* Đậm văn bản */
+        transition: background-color 0.3s ease; /* Hiệu ứng hover màu nền */
+    }
+
+    /* Khi di chuột qua nút */
+    .add-product-button:hover {
+        background-color: #0056b3; /* Màu nền thay đổi khi hover */
+    }
+</style>
+
+<div class="container">
+    <div class="row justify-content-center" style="width: 100%;">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 pt-4 mb-3">
+            <h4 class="text-center">THÔNG TIN THÀNH VIÊN</h4>
+            <div class="btn-group mb-3">
+                <a href="{% url 'thanhvien' %}" class="primary-btn add-product-button">Quay lại</a>
+           </div>
+                <div class="box-element pt-2" id="form-wrapper">
+                    <div id="shipping-info" class="align-items-center">
+                        <h5>Tên khách hàng: {{ user.last_name }}</h5>
+
+                        <p>
+                            <span>Tên Đăng Nhập: {{ user.username }}</span> <br>
+                            <span>Email: {{ user.email }}</span> <br>
+                            <span>Họ và Tên: {{ user.first_name }} {{ user.last_name }} </span> <br>
+                        </p>
+                    </div>
+                </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+
+    
+{% endblock viewuser %}

@@ -1,0 +1,26 @@
+/* styles.css */
+
+/* Thay đổi màu nền cho toàn bộ trang */
+body {
+    background-color: #f2f2f2;
+}
+
+/* Thay đổi màu nền cho sidebar */
+.sidebar {
+    background-color: #063b70;
+}
+
+/* Thay đổi màu nền cho navbar */
+.navbar {
+    background-color: #ffffff;
+}
+
+/* Thay đổi màu chữ cho tiêu đề sidebar */
+.sidebar-heading {
+    color: #ffffff;
+}
+
+/* Thay đổi màu chữ cho nút Đăng xuất */
+.dropdown-item {
+    color: #19bbe8;
+}

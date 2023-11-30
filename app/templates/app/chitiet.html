@@ -1,0 +1,279 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block chitiet %}
+
+	<!--================Single Product Area =================-->
+	<div class="product_image_area">
+		<div class="container">
+			<div class="row s_product_inner">
+
+				<div class="col-lg-6 col-md-6">
+					<div class="product__details__pic">
+						<div class="product__details__pic__item">
+							<img class="product__details__pic__item--large"
+								src="{{products.ImageURL}}" alt="">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-5 offset-lg-1">
+					<div class="s_product_text">
+						<h3>{{products.name}}</h3>
+						<h2>{{products.price | floatformat}} Đ</h2>
+						<ul class="list">
+							
+							<li><a href="#"><span>Tác Giả</span> : In Stock</a></li>
+							
+
+						</ul>
+
+						<p>{{products.describe}}</p>
+
+						<div class="quantity-container">
+							<h4 class="quantity-label">Số lượng</h4>
+							<button class="quantity-button" onclick="decreaseQuantity()">-</button>
+							<input type="number" class="quantity-input" value="1">
+							<button class="quantity-button" onclick="increaseQuantity()">+</button>
+						</div>
+						<script>
+							function decreaseQuantity() {
+								var inputElement = document.querySelector('.quantity-input');
+								var currentQuantity = parseInt(inputElement.value);
+						
+								if (currentQuantity > 1) {
+									inputElement.value = currentQuantity - 1;
+								}
+							}
+						
+							function increaseQuantity() {
+								var inputElement = document.querySelector('.quantity-input');
+								var currentQuantity = parseInt(inputElement.value);
+						
+								inputElement.value = currentQuantity + 1;
+							}
+						</script>
+						{% comment %} <button  style="border: none"   data-action="addProduct" class="primary-btn addProductDeltail ">Mua Ngay</button> {% endcomment %}
+						<button  style="border: none" data-product={{products.id}}  data-action="addProduct"  class="primary-btn addProductDeltail ">Thêm vào giỏ hàng</button>
+
+						<style>
+							/* CSS cho phần tăng/giảm số lượng */
+							.quantity-container {
+								display: flex;
+								align-items: center;
+								margin-bottom: 20px;
+							}
+						
+							.quantity-label {
+								margin-right: 10px;
+							}
+						
+							.quantity-button {
+								padding: 5px 10px;
+								background-color: #ccc;
+								border: none;
+								cursor: pointer;
+								transition: background-color 0.3s ease;
+							}
+						
+							.quantity-button:hover {
+								background-color: #aaa;
+							}
+						
+							.quantity-input {
+								width: 50px;
+								text-align: center;
+							}
+						
+							/* CSS cho nút "Thêm vào giỏ hàng" */
+							.addProductDeltail {
+								padding: 10px 20px;
+								background-color: #007bff;
+								color: #fff;
+								border: none;
+								cursor: pointer;
+								transition: background-color 0.3s ease;
+							}
+						
+							.addProductDeltail:hover {
+								background-color: #0056b3;
+							}
+						</style>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--================End Single Product Area =================-->
+
+	<!--================Product Description Area =================-->
+	<section class="product_description_area">
+		<div class="container">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				
+				<li class="nav-item">
+					<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+					 aria-selected="false">Chi Tiết</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+					 aria-selected="false">Bình Luận</a>
+				</li>
+				
+			</ul>
+			<div class="tab-content" id="myTabContent">	
+				{% comment %} chi tiết {% endcomment %}
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="table-responsive">
+						<table class="table">
+							<tbody>
+
+								<tr>
+									<td>
+										<h5>Nhà xuất bản</h5>
+									</td>
+									<td>
+										<h5>128mm</h5>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<h5>Năm xuất bản</h5>
+									</td>
+									<td>
+										<h5>508mm</h5>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<h5>Hình thức bìa</h5>
+									</td>
+									<td>
+										<h5>508mm</h5>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<h5>Số trang</h5>
+									</td>
+									<td>
+										<h5>508mm</h5>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<h5>Trọng lượng (gr)</h5>
+									</td>
+									<td>
+										<h5>508mm</h5>
+									</td>
+								</tr>
+
+								<tr>
+									<td>
+										<h5>Ngôn Ngữ</h5>
+									</td>
+									<td>
+										<h5>Tiếng Việt</h5>
+									</td>
+								</tr>
+
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="comment_list">
+								<div class="review_item">
+									<div class="media">
+										<div class="d-flex">
+											<img src="img/product/review-1.png" alt="">
+										</div>
+										<div class="media-body">
+											<h4>Blake Ruiz</h4>
+											<h5>12th Feb, 2018 at 05:56 pm</h5>
+											<a class="reply_btn" href="#">Reply</a>
+										</div>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+										commodo</p>
+								</div>
+								<div class="review_item reply">
+									<div class="media">
+										<div class="d-flex">
+											<img src="img/product/review-2.png" alt="">
+										</div>
+										<div class="media-body">
+											<h4>Blake Ruiz</h4>
+											<h5>12th Feb, 2018 at 05:56 pm</h5>
+											<a class="reply_btn" href="#">Reply</a>
+										</div>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+										commodo</p>
+								</div>
+								<div class="review_item">
+									<div class="media">
+										<div class="d-flex">
+											<img src="img/product/review-3.png" alt="">
+										</div>
+										<div class="media-body">
+											<h4>Blake Ruiz</h4>
+											<h5>12th Feb, 2018 at 05:56 pm</h5>
+											<a class="reply_btn" href="#">Reply</a>
+										</div>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+										commodo</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="review_box">
+								<h4>Post a comment</h4>
+								<form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" class="form-control" id="name" name="name" placeholder="Your Full name">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<input type="text" class="form-control" id="number" name="number" placeholder="Phone Number">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea class="form-control" name="message" id="message" rows="1" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<div class="col-md-12 text-right">
+										<button type="submit" value="submit" class="btn primary-btn">Submit Now</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Product Description Area =================-->
+
+{% endblock chitiet %}

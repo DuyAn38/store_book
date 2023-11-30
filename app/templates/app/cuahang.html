@@ -1,0 +1,126 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+{% block cuahang %}
+	<!-- End Banner Area -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-3 col-lg-4 col-md-5">
+				<div class="sidebar-categories">
+					<div class="head">Phân Loại Sách</div>
+					
+					<ul class="main-categories">	
+						{% for category in categories %}					
+						<li class="main-nav-list">
+							<a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable"> {{ category.name }}</a>
+							
+							<ul class="collapse" id="fruitsVegetable" data-toggle="collapse" aria-expanded="false" aria-controls="fruitsVegetable {{ category.id }}">
+								{% for subcategory in category.sub_categories.all %}
+								<li class="main-nav-list child"><a href="{% url 'phanloai' %}?category={{ subcategory.slug }}">{{ subcategory.name }}</a></li>
+								{% endfor %}
+							</ul>
+						</li>
+						{% endfor %}
+					</ul>
+					
+					<!-- a tuan phan loai-->
+					{% for category in categories %}
+					<div class="dropdown">
+						<button href="" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+							{{ category.name }}
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ category.id }}">
+							{% for subcategory in category.sub_categories.all %}
+								<li><a class="dropdown-item" href="{% url 'phanloai' %}?category={{ subcategory.slug }}">{{ subcategory.name }}</a></li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% endfor %}
+
+				</div>
+			</div>
+
+
+			<div class="col-xl-9 col-lg-8 col-md-7">
+				<!-- Start Filter Bar -->
+				<div class="filter-bar d-flex flex-wrap align-items-center">
+					<div class="sorting">
+						<select>
+							<option value="1">Default sorting</option>
+							<option value="1">Default sorting</option>
+							<option value="1">Default sorting</option>
+						</select>
+					</div>
+					<div class="sorting mr-auto">
+						<select>
+							<option value="1">Show 12</option>
+							<option value="1">Show 12</option>
+							<option value="1">Show 12</option>
+						</select>
+					</div>
+
+					
+				</div>
+				<!-- End Filter Bar -->
+
+				<!-- Start Best Seller -->
+				<section class="lattest-product-area pb-40 category-list">
+					<div class="row">
+						<!-- single product -->
+						{% for product in page.object_list %}
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-product">
+                            <img class="img-fluid" src="{{ product.ImageURL }}" class="card-img-top" alt="{{ product.name }}">
+                            <div class="product-details">
+                                <h6 class="card-title"><a href="{% url 'chitiet' %}?id={{ product.id }}">{{ product.name }}</a></h6>
+                                <h5 class="card-text">{{ product.price|floatformat:0 }} VND</h5>
+                                <div class="prd-bottom">
+                                    <a href="" class="social-info">
+                                        <span class="ti-bag"></span>
+                                        <p class="hover-text">Giỏ hàng</p>
+                                    </a>
+                                    <a href="{% url 'chitiet' %}?id={{ product.id }}" class="social-info">
+                                        <span class="lnr lnr-move"></span>
+                                        <p class="hover-text">Chi tiết</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:4 %}
+                    </div>
+                    <div class="row">
+                    {% endif %}
+                    {% endfor %}
+					</div>
+				</section>
+
+				<!-- tach trang -->
+				<div class="container">
+					<div class="row justify-content-center">
+						<ul class="d-flex">
+							{% if page.has_previous %}
+								<li class="page-item"><a class="page-link" href="?page=1">&laquo; Trang đầu</a></li>
+								<li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Trang trước</a></li>
+							{% endif %}
+				
+							{% for num in page.paginator.page_range %}
+								<li class="page-item {% if num == page.number %}active{% endif %}">
+									<a class="page-link" href="?page={{ num }}">{{ num }}</a>
+								</li>
+							{% endfor %}
+				
+							{% if page.has_next %}
+								<li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Trang sau</a></li>
+								<li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">Trang cuối &raquo;</a></li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+
+				<!-- End tach trang -->
+			</div>
+		</div>
+	</div>
+
+{% endblock cuahang %}

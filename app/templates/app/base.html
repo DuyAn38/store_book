@@ -1,0 +1,328 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js"style="margin-top: 150px; margin: {{none_margin}}">
+
+</head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Leona-Shop</title>
+
+	<link rel="stylesheet"  href="{%static 'app/css/all.min.css' %}">
+	<link rel="stylesheet" href="{%static 'app/css/bootstrap1.css' %}">
+	<!-- CSS============================================= -->
+    <link rel="stylesheet" href="{%static 'app/css/linearicons.css' %}">
+	<link rel="stylesheet" href="{%static 'app/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{%static 'app/css/themify-icons.css' %}">
+	<link rel="stylesheet" href="{%static 'app/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{%static 'app/css/owl.carousel.css' %}">
+	<link rel="stylesheet" href="{%static 'app/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{%static 'app/css/nouislider.min.css' %}">
+	<link rel="stylesheet" href="{%static 'app/css/ion.rangeSlider.css' %}">
+	<link rel="stylesheet" href="{%static 'app/css/ion.rangeSlider.skinFlat.css' %}">
+	<link rel="stylesheet" href="{%static 'app/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{%static 'app/css/main.css' %}">
+
+	<script src="{%static 'app/js/jquery-3.6.0.min.js' %}"></script>
+	
+	
+	<script type="text/javascript" >
+		var user = '{{request.user}}'
+		function getCookie(name) {
+		  let cookieValue = null;
+		  if (document.cookie && document.cookie !== '') {
+			  const cookies = document.cookie.split(';');
+			  for (let i = 0; i < cookies.length; i++) {
+				  const cookie = cookies[i].trim();
+				  // Does this cookie string begin with the name we want?
+				  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					  break;
+				  }
+			  }
+		  }
+		  return cookieValue;
+	  }
+	  const csrftoken = getCookie('csrftoken');
+	  </script>
+</head>
+
+<body>
+
+	<!-- Start Header Area -->
+	<header class="header_area sticky-header">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light main_box">
+				<div class="container">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<a 
+					class="navbar-brand logo_h" href="{% url 'trangchu' %}"> <img src="{% static 'app/images/logoo.png'%}" width="160" height="60" alt="">
+					</a>
+
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+						<ul class="nav navbar-nav menu_nav ml-auto">
+							
+							<li class="nav-item active"><a class="nav-link" href="{% url 'trangchu' %}">Trang chủ</a></li>
+							<li class="nav-item"><a class="nav-link" href="{% url 'cuahang' %}">Cửa hàng</a></li>
+							<li class="nav-item"><a class="nav-link" href="{% url 'blog' %}">Tin Tức</a></li>
+							<li class="nav-item"><a class="nav-link" href="{% url 'lienhe' %}">Liên Hệ</a></li>
+							<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Chính sách và bảo hành</a>
+								<ul class="dropdown-menu">
+									<li class="nav-item"><a class="nav-link" href="{% url 'baomat' %}">Bảo mật</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'chinhsachgiaohang' %}">Vận chuyển</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'doitra' %}">Đổi trả	</a></li>
+								</ul>
+							</li>
+
+
+						</ul>
+
+
+						<ul class="nav navbar-nav navbar-right">
+							<li class="nav-item d-flex">
+								<a href="{% url 'giohang' %}">
+									<span class="ti-bag"></span>
+								</a>
+									<span>{{count}}</span></a>
+							</li>
+							<li class="nav-item">
+								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
+							</li>
+
+		
+
+							<li class="nav-item user-info">
+								<div class="dropdown">
+									<button class="dropbtn">
+										<span class="lnr lnr-user"></span>
+									</button>
+									<div class="dropdown-content">
+										<!-- Phần Đăng nhập (hiện khi user_not_login có giá trị True) -->
+										
+											<a style="display: {{ user_not_login }}" href="{% url 'dangnhap' %}">Đăng nhập</a>
+
+										<!-- Các phần còn lại (hiện khi user_login có giá trị True) -->
+											<a style="display: {{ user_login }}" href="{% url 'thongtincanhan' %}">Thông tin cá nhân</a>
+											<a style="display: {{ user_login }}" href="{% url 'donhangcuatoi' %}">Đơn hàng của tôi</a>
+											<a style="display: {{ user_login }}" href="{% url 'bangthongtin' %}">Trang quản lý</a>
+											<a style="display: {{ user_login }}" href="{% url 'dangxuat' %}">Đăng xuất</a>
+											
+									</div>
+								</div>
+							</li>
+							<style>
+								/* CSS cho dropdown menu */
+								.dropdown {
+									position: relative;
+									display: inline-block;
+								}
+
+								.dropbtn {
+									background-color: transparent;
+									border: none;
+									cursor: pointer;
+								}
+
+								.dropdown-content {
+									display: none;
+									position: absolute;
+									background-color: #f9f9f9;
+									min-width: 160px;
+									box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+									z-index: 1;
+								}
+
+								.dropdown-content a {
+									color: black;
+									padding: 12px 16px;
+									text-decoration: none;
+									display: block;
+								}
+
+								.dropdown-content a:hover {
+									background-color: #f1f1f1;
+								}
+
+								/* Hiển thị dropdown menu khi hover hoặc click vào biểu tượng người dùng */
+								.dropdown:hover .dropdown-content {
+									display: block;
+								}
+
+							</style>
+						</ul>
+
+					</div>
+				</div>
+			</nav>
+		</div>
+
+		<div class="search_input" id="search_input_box">
+			<div class="container">
+				<form method="POST" action="{% url 'timkiem' %}" class="d-flex justify-content-between">
+					{% csrf_token %}
+					 <input type="text" class="form-control" name="searched" placeholder="Tìm kiếm ở đây">
+					
+					
+					{% comment %} <span class="lnr lnr-cross" id="close_search" title="Close Search"></span> {% endcomment %}
+				</form>
+			</div>
+		</div> 
+
+	</header>
+
+	
+	<!-- End Header Area -->
+
+	{% block trangchu %}{% endblock trangchu %}
+	{% block giohang %}{% endblock giohang %}
+	{% block lienhe %}{% endblock lienhe %}
+	{% block dangnhap %}{% endblock dangnhap %}
+	{% block dangky %}{% endblock dangky %}
+	{% block blog %}{% endblock blog %}
+	{% block thongtincanhan %}{% endblock thongtincanhan %}
+	{% block chitiet %}{% endblock chitiet %}
+	{% block timkiem %}{% endblock timkiem %}
+	{% block themdiachi %}{% endblock themdiachi %}
+	{% block suadiachi %}{% endblock suadiachi %}
+	{% block suathongtincanhan %}{% endblock suathongtincanhan %}
+	
+	{% block donhang %}{% endblock donhang %}
+	{% block muahang %}{% endblock muahang %}
+	{% block hoadon %}{% endblock hoadon %}
+	{% block baomat %}{% endblock baomat %}
+	{% block chinhsachgiaohang %}  {% endblock chinhsachgiaohang %}
+	{% block doitra %}  {% endblock doitra %}
+	{% block yeuthich %}{% endblock yeuthich %}
+	{% block donhangcuatoi %}{% endblock donhangcuatoi %}
+
+	{% block cuahang %}{% endblock cuahang %}
+	{% block phanloai %}{% endblock phanloai %}
+	<!-- start footer Area -->
+	<footer class="footer-area section_gap">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Về chúng tôi</h6>
+						<ul class="list-links">
+							<li><a href="{% url 'baomat' %}">Chính sách bảo mật</a></li>
+							<li><a href="{% url 'chinhsachgiaohang' %}">Chính sách vận chuyển</a></li>
+							<li><a href="{% url 'doitra' %}">Chính sách đổi trả</a></li>
+							<li><a href="#">Hướng dẫn đặt hàng</a></li>
+							
+							<li><a href="{% url 'lienhe' %}">Thông tin liên hệ</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4  col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h6>Tin tức</h6>
+						<p>Luôn cập nhật những thông tin mới nhất của chúng tôi</p>
+						<div class="" id="mc_embed_signup">
+
+							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+							 method="get" class="form-inline">
+
+								<div class="d-flex flex-row">
+
+									<input class="form-control" name="EMAIL" placeholder="Hòm thư" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Hòm thư '"
+									 required="" type="email">
+
+
+									<button class="click-btn btn btn-default"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></button>
+									<div style="position: absolute; left: -5000px;">
+										<input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+									</div>
+
+									<!-- <div class="col-lg-4 col-md-4">
+												<button class="bb-btn btn"><span class="lnr lnr-arrow-right"></span></button>
+											</div>  -->
+								</div>
+								<div class="info"></div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3  col-md-6 col-sm-6">
+					<div class="single-footer-widget mail-chimp">
+						<h6 class="mb-20"></h6>
+						<ul class="instafeed d-flex flex-wrap">
+							
+
+							<li><img src="{% static 'images/i1.jpg '%}"></li>
+							<li><img src="{% static 'images/i2.jpg '%}"></li>
+							<li><img src="{% static 'images/i3.jpg '%}"></li>
+							<li><img src="{% static 'images/i4.jpg '%}"></li>
+							<li><img src="{% static 'images/i5.jpg '%}"></li>
+							<li><img src="{% static 'images/i6.jpg '%}"></li>
+							<li><img src="{% static 'images/i7.jpg '%}"></li>
+							<li><img src="{% static 'images/i8.jpg '%}"></li>
+							
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-6 col-sm-6">
+					<div class="single-footer-widget">
+						<h7>Theo dõi chúng tôi</h7>
+						<div class="footer-social d-flex align-items-center">
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-instagram"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-telegram"></i></a>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
+				<p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+</p>
+			</div>
+		</div>
+	</footer>
+	
+	
+	<!-- End footer Area -->
+    <script src="{%static 'app/js/popper.min.js' %}" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"crossorigin="anonymous"></script>
+    <script src="{%static 'app/js/jquery-2.2.4.min.js' %} "></script>
+    <script src="{%static 'app/js/bootstrap.min.js' %} "></script>
+    <script src="{%static 'app/js/jquery.ajaxchimp.min.js' %} "></script>
+    <script src="{%static 'app/js/jquery.nice-select.min.js' %} "></script>
+    <script src="{%static 'app/js/jquery.sticky.js' %} "></script>
+    <script src="{%static 'app/js/nouislider.min.js' %} "></script>
+    <script src="{%static 'app/js/countdown.js' %} "></script>
+    <script src="{%static 'app/js/jquery.magnific-popup.min.js' %} "></script>
+    <script src="{%static 'app/js/owl.carousel.min.js' %} "></script>
+	<script src="{%static 'app/js/addProduct.js' %} "></script>
+	<script src="{%static 'app/js/addProductDeltail.js' %} "></script>
+	<script src="{%static 'app/js/reduceProduct.js' %} "></script>
+    <!--gmaps Js-->
+	<script src="{%static 'app/js/bootstrap2.js' %} "></script>
+	<script src="{%static 'app/js/map.js' %} "></script>
+    <script src="{%static 'app/js/gmaps.min.js' %} "></script>
+    <script src="{%static 'app/js/main.js' %} "></script>
+
+</body>
+
+</html>

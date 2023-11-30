@@ -1,0 +1,86 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+{% block giohang %}
+    
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Mặt hàng</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Tổng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex" >
+                                        <img style="width: 115px;" src="{{ item.product.ImageURL }}" alt="{{ item.product.name }}">
+                                    </div>
+                                    <div class="media-body">
+                                        <p>{{ item.product.name }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <td>
+                                <h5>{{ item.product.price | floatformat:0 }} VND</h5>
+                            </td>
+
+                            <td>
+                                <div class="d-flex">
+                                    <span class="input-group-btn">
+                                        <button data-product="{{ item.product.id }}" data-action="remove"  class=" update-btn btn btn-outline-secondary reduce-btn" type="button"><i class="fas fa-minus"></i></button>
+                                    </span>
+                                    <input style="width:60px" stype="text" class="form-control text-center" value="{{ item.quantity }}">
+                                    <span class="input-group-btn">
+                                        <button data-product="{{ item.product.id }}" data-action="add"  class=" update-btn btn btn-outline-secondary increase-btn" type="button"><i class="fas fa-plus"></i></button>
+                                    </span>
+                                </div>
+                            </td>
+
+                            <td>
+                                <h5>{{ item.total | floatformat:0 }} VND</h5>
+                            </td>
+                            <td><button data-product="{{ item.product.id }}" data-action="delete" class="update-btn delete-button">Xóa</button></td>
+                        </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td colspan="3"></td>
+                            <td style="text-align: right;">
+                                <h5>Tổng tiền: {{ total_all | floatformat:0 }} VNĐ</h5>
+                            </td>
+                            
+                            <td></td>
+                            
+                        </tr>
+                        
+                        <tr class="out_button_area">
+                            <td colspan="3"></td>
+                            <td>
+                                <div class="checkout_btn_inner d-flex align-items-center justify-content-end">
+                                    <a class="gray_btn" href="{% url 'trangchu' %}">Tiếp tục mua sắm</a>
+                                    <a class="primary-btn" href="{% url 'muahang' %}">Tiến hành kiểm tra</a> 
+                                </div>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--================End Cart Area =================-->
+
+
+{% endblock giohang %}

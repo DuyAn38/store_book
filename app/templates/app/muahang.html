@@ -1,0 +1,142 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+{% block muahang %}
+<div class="container">
+    <div class="row" style="width:100%">
+        <div class="col-md-5">
+            <div class="box-element" id="form-wrapper">
+                <form id="form" method="POST" action="">
+                    {% csrf_token %}
+                    {% if form_show == "show" %}
+                    <div id="shipping-info">
+                        <h4>CHỌN ĐỊA CHỈ NGƯỜI DÙNG</h4>
+                        {% for address in allAddress %}
+                        <div class="form-check p-2">
+                            <input class="form-check-input" type="radio" name="address" id="address{{ forloop.counter }}" value="{{ forloop.counter }}"
+                                data-id="{{ address.id }}" data-name="{{ address.name_user }}" data-moblie="{{ address.mobile }}" data-address="{{ address.adress }}"
+                                data-commune="{{ address.commune }}" data-district="{{ address.district }}" data-city="{{ address.city }}">
+                            <label class="form-check-label" for="address{{ forloop.counter }}">
+                                Địa chỉ: {{ address.name_user }} - {{ address.mobile }} - {{ address.adress }}
+                                - {{ address.commune }} - {{ address.district }} - {{ address.city }}
+                            </label>
+                        </div>
+                        {% endfor %}
+                        <h4>CHỌN PHƯƠNG THỨC GIAO HÀNG</h4>
+                        <div class="form-check p-2">
+                            <input class="form-check-input" type="radio" name="shipping-method" id="shipping-method1" value="Giao hàng nhanh">
+                            <label class="form-check-label" for="shipping-method1">
+                                Giao hàng nhanh
+                            </label>
+                        </div>
+                        <div class="form-check p-2">
+                            <input class="form-check-input" type="radio" name="shipping-method" id="shipping-method2" value="Giao hàng tiết kiệm">
+                            <label class="form-check-label" for="shipping-method2">
+                                Giao hàng tiết kiệm
+                            </label>
+                        </div>
+                    </div>
+                    {% else %}
+                    {% endif %}
+                    <button id="submit-button" type="submit" class="btn primary-btn btn-sm"><a style="color: white" href="{% url 'muahang' %}">Mua</a></button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="box-element">
+                <h3>Hóa đơn</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Ảnh</th>
+                            <th>Sản phẩm</th>
+                            <th>Size</th>
+                            <th>Đơn Giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td><img style="height: 80px; width: auto;" src="{{ item.product.ImageURL }}" /></td>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.size }}</td>
+                            <td>{{ item.product.price|floatformat:0 }} VND</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.total|floatformat:0 }} VND</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="text-right">
+                    <h4>Tổng cộng: {{ total_all|floatformat:0 }} VND</h4>
+                </div>
+                <!-- Thêm phần tử để hiển thị phương thức giao hàng -->
+                <div id="shipping-method-section"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("form");
+        const addressRadios = form.querySelectorAll('input[type="radio"][name="address"]');
+    
+        const submitButton = document.getElementById("submit-button");
+        
+        const shippingMethodRadios = form.querySelectorAll('input[type="radio"][name="shipping-method"]');
+    
+            
+    
+    
+        // Lắng nghe sự kiện click nút Mua
+        submitButton.addEventListener("click", function (event) {
+            event.preventDefault(); // Ngăn chặn gửi form mặc định
+    
+            let selectedAddress = null;
+            let id_address = null;
+            let selectedMethod = null;
+    
+            // Lấy thông tin địa chỉ được chọn
+            addressRadios.forEach(function (radio) {
+                if (radio.checked) {
+                    selectedAddress = {
+                        id: radio.getAttribute("data-id"),
+                        name_user: radio.getAttribute("data-name"),
+                        moblie: radio.getAttribute("data-moblie"),
+                        address: radio.getAttribute("data-address"),
+                        commune: radio.getAttribute("data-commune"),
+                        district: radio.getAttribute("data-district"),
+                        city: radio.getAttribute("data-city"),
+                    };
+                    id_address = selectedAddress.id;
+                }
+            });
+            shippingMethodRadios.forEach(function (radio) {
+                
+                if (radio.checked) {
+                    selectedMethod = radio.value;
+                    // Sử dụng selectedMethod theo ý muốn của bạn, ví dụ:
+                    console.log("Phương thức giao hàng đã chọn: " + selectedMethod);
+                }
+                
+            });
+    
+
+            if (selectedAddress) {
+                sessionStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+                window.location.href = "http://127.0.0.1:8000/hoadon/?id=" + id_address + "&paymentMethod=" + encodeURIComponent(selectedMethod);
+            }
+        });
+    });
+    
+</script>
+
+
+
+
+{% endblock muahang %}
