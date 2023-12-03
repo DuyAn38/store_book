@@ -27,7 +27,7 @@ def xemdonhang(request):
              'items': items,
              'total': total,
              }
-    return render(request, 'admin/xemdonhang.html', context)
+    return render(request, 'admin/donhang_xem.html', context)
 
 def xoadonhang(request):
     id = request.GET.get('id', '')  # lấy id khi người dùng vlick vào sản phẩm nào đó
@@ -43,3 +43,9 @@ def xoadonhang(request):
     context = {'product': order}
 
     return render(request, 'admin/xoadonhang.html', context)
+
+def xoadonhang(request, id):
+    order = get_object_or_404(Category, id=id)
+    order.objects.filter(id=id).delete()
+    messages.warning(request, 'xóa đơn hàng thành công')
+    return redirect('danhmuc')

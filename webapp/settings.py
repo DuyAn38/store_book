@@ -130,3 +130,7 @@ STATICFILE_DIRS = [
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'app/static/images')
 MEDIA_URL = '/images/'
+
+# settings.py
+
+LANGUAGE_CODE = 'vi'  # hoặc 'vi-VN'

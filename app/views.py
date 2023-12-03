@@ -8,9 +8,7 @@ from .python.app.base import *
 from .python.app.updateItem import updateItem
 from .python.app.timkiem import timkiem
 from .python.app.lienhe import lienhe
-from .python.app.baomat import baomat
-from .python.app.chinhsachgiaohang import chinhsachgiaohang
-from .python.app.doitra import doitra
+from .python.app.chinhsach import baomat,chinhsachgiaohang,doitra
 
 
 from .python.app.giohang import giohang
@@ -21,7 +19,7 @@ from .python.app.donhangcuatoi import donhangcuatoi,deletemyOrder
 from .python.app.dangky import dangky
 from .python.app.dangnhap import dangnhap,dangxuat
 from .python.app.blog import blog
-from .python.app.thongtincanhan import thongtincanhan,suathongtincanhan
+from .python.app.thongtincanhan import thongtincanhan,suathongtincanhan,doimatkhau
 from .python.app.diachi import themdiachi,suadiachi,xoadiachi
 from .python.app.chitiet import chitiet
 

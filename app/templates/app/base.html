@@ -1,4 +1,5 @@
 {% load static %}
+{% include 'layout/messege.html'%}
 <!DOCTYPE html>
 <html lang="zxx" class="no-js"style="margin-top: 150px; margin: {{none_margin}}">
 
@@ -118,7 +119,7 @@
 									<div class="dropdown-content">
 										<!-- Phần Đăng nhập (hiện khi user_not_login có giá trị True) -->
 										
-											<a style="display: {{ user_not_login }}" href="{% url 'dangnhap' %}">Đăng nhập</a>
+											<a style="display: {{ user_not_login }} " href="{% url 'dangnhap' %}">Đăng nhập</a>
 
 										<!-- Các phần còn lại (hiện khi user_login có giá trị True) -->
 											<a style="display: {{ user_login }}" href="{% url 'thongtincanhan' %}">Thông tin cá nhân</a>
@@ -216,6 +217,8 @@
 
 	{% block cuahang %}{% endblock cuahang %}
 	{% block phanloai %}{% endblock phanloai %}
+
+	{% block doimatkhau %}{% endblock doimatkhau %}
 	<!-- start footer Area -->
 	<footer class="footer-area section_gap">
 		<div class="container">

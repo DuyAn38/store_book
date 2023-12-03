@@ -1,0 +1,27 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block doimatkhau %}
+{% include 'layout/messege.html'%}
+    <div class="container mt-4 mb-3" style="width: 550px; border: #1b1e21">
+      <h2 class="mb-4 text-center">ĐỔI MẬT KHẨU</h2>
+
+      <form method="POST" action="" >
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit"  class="primary-btn text-center border-0">Thay đổi mật khẩu</button>
+    </form>
+      </form>
+
+    </div>
+
+
+{% endblock doimatkhau %}

@@ -70,18 +70,10 @@ def suasanpham(request):
                'form': form}
     return render(request, 'admin/sanpham_sua.html', context)
 
-# def xoasanpham(request):
-#     id = request.GET.get('id', '')  # lấy id khi người dùng click vào sản phẩm nào đó
-#     product = get_object_or_404(Product, id=id)
-#     if request.method == 'POST':
-#         product.delete()
-#         messages.success(request, 'Xóa sản phẩm thành công')
-#         return redirect('sanpham')
-#     context ={'product': product}
-#     return render(request, 'admin/xoasanpham.html', context)
 
 def xoasanpham(request, id):
     category = get_object_or_404(Product, id=id)
     Product.objects.filter(id=id).delete()
+    messages.warning(request, 'Xóa sản phẩm thành công!')
     return redirect('sanpham')
 

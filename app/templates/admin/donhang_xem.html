@@ -1,5 +1,4 @@
-
-{% extends 'admin/manage.html' %}
+{% extends 'admin/basea.html' %}
 {% load static %}
 
 {% block xemdonhang %}
@@ -29,20 +28,18 @@
             <div class="col-md-10 pt-4 mb-3">
             <h4 class="text-center">HÓA ĐƠN</h4>
             <div class="btn-group mb-3">
-                <a href="{% url 'quanlydonhang' %}" class="primary-btn add-product-button">Quay lại</a>
+                <a href="{% url 'donhang' %}" class="primary-btn add-product-button">Quay lại</a>
            </div>
                 <div class="box-element pt-2" id="form-wrapper">
                     <div id="shipping-info">
                         <h5>Tên khách hàng: {{ order.address.name_user }}</h5>
-
+                        <p>Số điện thoại: {{ order.address.mobile }} </p>
                         <p>
-                           
-                            <span>Số điện thoại: {{ order.address.mobile }}</span>,
-                            <span>Xã/Phường: {{ order.address.commune }}</span>,
-                            <span>Huyện: {{ order.address.district }}</span>,
-                            <span>Thành phố: {{ order.address.city }}</span>,
-                            <span>Địa chỉ cụ thể : {{ order.address.adress }}</span>.
+                            <span>Địa Chỉ: Xã {{ order.address.commune }}</span>,
+                            <span>Huyện {{ order.address.district }}</span>,
+                            <span>Tỉnh {{ order.address.city }}</span>.
                         </p>
+                        <p>Địa chỉ cụ thể : {{ order.address.adress }}</p>
                         <p>Phương thức: {{order.payment}} </p>
                         <p>Trạng thái: Đang xử lý    </p>
                     </div>
@@ -57,8 +54,8 @@
                                 <ul style="list-style: none; font-size: 14px;">
                                     <li class=""> <b>Tên mặt hàng: {{item.product.name}}</b></li>
                                     <li  class="">Số tiền: {{item.product.price|floatformat:0}} VNĐ</li>
-                                    <li  class="">Số lượng: {{item.quantity}} Đôi</li>
-                                    <li  class="">Size: {{ item.size}} </li>
+                                    <li  class="">Số lượng: {{item.quantity}} Quyển</li>
+                                    
                                 </ul>
                             </div>
                         </div>

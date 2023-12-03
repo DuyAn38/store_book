@@ -16,9 +16,10 @@ def themdanhmuc(request):
         form = AddCategory(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Category saved successfully!')
+            messages.success(request, 'Thêm danh mục thành công')
             return redirect('danhmuc')
-
+        else:
+            messages.error(request, 'Thêm danh mục thất bại')
     context = {'form': form,
                'messages': messages,}
     return render(request, 'admin/danhmuc_them.html', context)
@@ -31,8 +32,9 @@ def suadanhmuc(request):
         form = AddCategory(request.POST, request.FILES, instance=category)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Thêm danh mục thành công!')
+            messages.success(request, 'sửa mục thành công!')
             return redirect('danhmuc')
+            
     form = AddCategory(instance=category, initial={'sub_category': category.sub_category, 
                                                    'is_sub': category.is_sub,
                                                    'name': category.name, 
@@ -46,5 +48,6 @@ def suadanhmuc(request):
 def xoadanhmuc(request, id):
     category = get_object_or_404(Category, id=id)
     Category.objects.filter(id=id).delete()
+    messages.warning(request, 'xóa danh mục thành công')
     return redirect('danhmuc')
     

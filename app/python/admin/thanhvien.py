@@ -25,7 +25,11 @@ def themthanhvien(request):
         from_register = CreateUserForm(request.POST)
         if from_register.is_valid(): # kiểm tra đúng yêu cầu thì lưu cái form đó lại
             from_register.save()
-            return redirect('quanlythanhvien')
+            messages.success(request, 'Thêm thành viên thành công')
+            return redirect('thanhvien')
+        else:
+            messages.error(request, 'Lỗi')
+            
     return render(request, "admin/thanhvien_them.html", context)
 
 def xemthanhvien(request):
@@ -35,19 +39,36 @@ def xemthanhvien(request):
     print(id)
     context={'user': user,
              }
-    return render(request, 'admin/sanpham_xem.html', context)
+    return render(request, 'admin/thanhvien_xem.html', context)
 
 
-def xoathanhvien(request):
-    id = request.GET.get('id', '') 
-    user = get_object_or_404(User, id=id)
-    print(user)
-    if request.method == 'POST':
-        user.delete()
-        messages.success(request, 'Xóa thành viên thành công')
-        return redirect('quanlythanhvien')
-    context = {'user': user}
-    return render(request, 'admin/thanhvien_xoa.html', context)
+def suathanhvien(request):
+    id = request.GET.get('id', '')
+    user =  get_object_or_404(User, id=id)
+    print('id user: ')
+    print(id)
+    context={'user': user,
+             }
+    return render(request, 'admin/thanhvien_xem.html', context)
+
+
+
+# def xoathanhvien(request):
+#     id = request.GET.get('id', '') 
+#     user = get_object_or_404(User, id=id)
+#     print(user)
+#     if request.method == 'POST':
+#         user.delete()
+#         messages.success(request, 'Xóa thành viên thành công')
+#         return redirect('quanlythanhvien')
+#     context = {'user': user}
+#     return render(request, 'admin/thanhvien_xoa.html', context)
+
+def xoathanhvien(request, id):
+    category = get_object_or_404(User, id=id)
+    User.objects.filter(id=id).delete()
+    messages.warning(request, 'xóa thành viên thành công')
+    return redirect('thanhvien')
 
 
 

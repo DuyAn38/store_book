@@ -1,6 +1,7 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block thongtincanhan %}
+{% include 'layout/messege.html'%}
 
 <div class="container mt-5">
     <div class="row">
@@ -16,7 +17,7 @@
                     
                     <!-- Các liên kết xử lý khác cho người dùng -->
                     <button style="border: none;" class="primary-btn" data-toggle="modal" ><a style="color: white" href="{% url 'suathongtincanhan' %}">sửa thông tin</a></button>
-                    <button style="border: none;font-size: 14px; padding: 5px 20px;" class="primary-btn" data-toggle="modal" ><a style="color: white" href="">Đổi mật khẩu</a></button>
+                    <button style="border: none;font-size: 14px; padding: 5px 20px;" class="primary-btn" data-toggle="modal" ><a style="color: white" href="{% url 'doimatkhau' %}">Đổi mật khẩu</a></button>
                 </div>
             </div>
         </div>

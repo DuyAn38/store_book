@@ -74,7 +74,7 @@
     <div class="container mt-4">
     <h2>Quản lý thành viên</h2>
     <div class="btn-group mb-3">
-       <a href="{% url 'themthanhvien' %}" class="primary-btn add-product-button">Thêm sản phẩm</a>
+       <a href="{% url 'themthanhvien' %}" class="primary-btn add-product-button">Thêm Thành Viên</a>
   </div>
 
 
@@ -115,8 +115,29 @@
                                     </td>
                                     
                                     <td>
-                                        <a href="{% url 'xemthanhvien' %}?id={{ user.id }}" class="btn btn-primary btn-sm">xem</a>
-                                        <a href="{% url 'xoathanhvien' %}?id={{ user.id }}" class="btn btn-danger btn-sm">Xóa</a>
+                                        <a href="{% url 'xemthanhvien' %}?id={{ user.id }}" class="btn btn-primary btn-circle">xem</a>
+                                        <a href="{% url 'xemthanhvien' %}?id={{ user.id }}" class="btn btn-primary btn-circle">sửa</a>
+                                        <a href="" data-product-id="{{ user.id }}" data-product-name="{{ user.name }}" class="btn btn-danger btn-circle " data-toggle="modal" data-target="#deleteProductModal_{{ user.id }}"> Xóa </a>
+                                        <div class="modal" id="deleteProductModal_{{ user.id }}">
+                                            <div class="modal-dialog" >
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Xóa Danh Mục</h5>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Bạn có chắc chắn muốn xóa thành viên  <span id="product-name"></span>?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                                        <a href="{% url 'xoathanhvien' user.id %}" type="button" class="delete-product btn btn-danger">Xác nhận</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
                                     </td>
                                 </tr>
                                 {% endfor %}

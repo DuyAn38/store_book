@@ -14,6 +14,7 @@ def chitiet(request):
     else:
         print('not admin')
         show_manage = 'none'
+        
     total_all = 0
     count = 0
     if request.user.is_authenticated:

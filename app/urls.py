@@ -32,6 +32,8 @@ urlpatterns = [
     path('themdiachi/', views.themdiachi , name="themdiachi" ),
     path('suadiachi/', views.suadiachi , name="suadiachi" ),
     path('xoadiachi/', views.xoadiachi , name="xoadiachi" ),
+    path('doimatkhau/', views.doimatkhau , name="doimatkhau" ),
+    
 
     path('chitiet/', views.chitiet , name="chitiet" ),
 
@@ -56,11 +58,11 @@ urlpatterns = [
     path('thanhvien/', views.thanhvien , name="thanhvien" ),
     path('themthanhvien/', views.themthanhvien , name="themthanhvien" ),
     path('xemthanhvien/', views.xemthanhvien , name="xemthanhvien" ),
-    path('xoathanhvien/', views.xoathanhvien , name="xoathanhvien" ),
+    path('xoathanhvien/<int:id>/', views.xoathanhvien , name="xoathanhvien" ),
 
     path('donhang/', views.donhang , name="donhang" ),
     path('xemdonhang/', views.xemdonhang , name="xemdonhang" ),
-    path('xoadonhang/', views.xoadonhang , name="xoadonhang" ),
+    path('xoadonhang/<int:id>/', views.xoadonhang , name="xoadonhang" ),
     #API
 
 ]

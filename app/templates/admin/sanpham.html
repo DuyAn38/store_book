@@ -109,8 +109,8 @@
                                         {{ product.price|floatformat:0 }}
                                     </td>
                                     <td>
-                                        <a href="{% url 'xemsanpham' %}?id={{ product.id }}" class="btn btn-primary btn-sm">Xem</a>
-                                        <a href="{% url 'suasanpham' %}?id={{ product.id }}"  class="btn btn-primary btn-sm">Sửa</a>
+                                        <a href="{% url 'xemsanpham' %}?id={{ product.id }}" class="btn btn-primary btn-circle">Xem</a>
+                                        <a href="{% url 'suasanpham' %}?id={{ product.id }}"  class="btn btn-primary btn-circle">Sửa</a>
                                         {% comment %} <a href="{% url 'xoasanpham' %}?id={{ product.id }}" class="btn btn-danger btn-sm">Xóa</a> {% endcomment %}
 
                                         <a href="" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}" class="btn btn-danger btn-circle " data-toggle="modal" data-target="#deleteProductModal_{{ product.id }}"> Xóa </a>

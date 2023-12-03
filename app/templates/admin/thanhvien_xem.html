@@ -1,8 +1,6 @@
-
-{% extends 'admin/manage.html' %}
+{% extends 'admin/basea.html' %}
 {% load static %}
-
-{% block viewuser %}
+{% block xemthanhvien %}
 <style>
     /* Tùy chỉnh CSS cho nút Quay lại */
     .add-product-button {
@@ -32,7 +30,7 @@
            </div>
                 <div class="box-element pt-2" id="form-wrapper">
                     <div id="shipping-info" class="align-items-center">
-                        <h5>Tên khách hàng: {{ user.last_name }}</h5>
+                        <h5>Tên khách hàng: {{ user.last_name }} </h5>
 
                         <p>
                             <span>Tên Đăng Nhập: {{ user.username }}</span> <br>
@@ -48,4 +46,4 @@
 
 
     
-{% endblock viewuser %}
+{% endblock xemthanhvien %}
