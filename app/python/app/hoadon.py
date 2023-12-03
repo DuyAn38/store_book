@@ -56,6 +56,7 @@ def hoadon(request):
         for item in items:
             items_order = OrderItem(product=item.product, order=order, quantity=item.quantity, total= item.product.price * item.quantity)
             items_order.save()
+            # item.product.count_order += 1
 
         products = OrderItem.objects.filter(order=order)
         for item in products:

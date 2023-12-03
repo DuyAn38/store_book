@@ -24,10 +24,12 @@ def giohang(request):
         user_not_login = "none"
         user_login = "show"
         for item in items:
-            print(item)
-            item.total = item.product.price * item.quantity
-            total_all += item.product.price * item.quantity
-            count += item.quantity
+            if item.product is not None and hasattr(item.product, 'price'):
+                item.total = item.product.price * item.quantity
+                total_all += item.product.price * item.quantity
+                count += item.quantity
+            else:
+                item.total = 0
     else:
         items = []
         user_not_login = "show"

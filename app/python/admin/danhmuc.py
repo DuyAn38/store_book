@@ -11,6 +11,7 @@ def danhmuc(request):
 
 def themdanhmuc(request):
     form = AddCategory()
+    categories = Category.objects.filter(is_sub=False)
     if request.method == 'POST':
         form = AddCategory(request.POST, request.FILES)
         if form.is_valid():

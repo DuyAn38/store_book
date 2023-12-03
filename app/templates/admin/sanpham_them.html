@@ -27,7 +27,7 @@
         <div class="form-group">
             <label for="{{ form.category.id_for_label }}">Danh Mục </label><br>
             {% for choice in form.category %}
-            <span>hi {{choice.is_sub}}</span>
+            <span> {{choice.is_sub}}</span>
             {% if not choice.is_sub %}
                 <div class="form-check form-check-inline">
                     {{ choice }}

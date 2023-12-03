@@ -4,7 +4,6 @@ from app.models import *
 
 
 def base(request):
-    
     user = request.user
     if user.is_staff:
         print('admin')
@@ -32,7 +31,10 @@ def trangchu(request):
 
     products = Product.objects.all()
     paginator = Paginator(products, 8)  # Chia danh sách sản phẩm thành các trang, mỗi trang có 8 sản phẩm
-    recent_products = Product.objects.order_by('time')[:8]
+    recent_products = Product.objects.order_by('-time')[:8]
+    view_products = Product.objects.order_by('-view')[:8]
+    print("View")
+    print(view_products)
     page_number = request.GET.get('page')  # Lấy số trang từ tham số truy vấn URL
     page = paginator.get_page(page_number)  # Lấy trang hiện tại
     total_all = 0
@@ -43,14 +45,17 @@ def trangchu(request):
         user_not_login = "none"
         user_login = "show"
         for item in items:
-            print(item)
-            item.total = item.product.price * item.quantity
-            total_all += item.product.price * item.quantity
-            count += item.quantity
+            if item.product is not None and hasattr(item.product, 'price'):
+                item.total = item.product.price * item.quantity
+                total_all += item.product.price * item.quantity
+                count += item.quantity
+            else:
+                item.total = 0
     else:
         items = []
         user_not_login = "show"
         user_login = "none"
+        
 
     categories = Category.objects.filter(is_sub=False)  # lay cac damh muc lon
     active_category = request.GET.get('category', '')
@@ -65,6 +70,7 @@ def trangchu(request):
                'active_category': active_category,
                'show_manage': show_manage,
                'page': page,
+               'view_products': view_products,
                }
     return render(request, 'app/trangchu.html', context)
 

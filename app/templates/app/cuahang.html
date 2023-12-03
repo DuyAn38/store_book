@@ -9,34 +9,28 @@
 				<div class="sidebar-categories">
 					<div class="head">Phân Loại Sách</div>
 					
-					<ul class="main-categories">	
-						{% for category in categories %}					
+					<ul class="main-categories">
+						{% for category in categories %}                    
 						<li class="main-nav-list">
-							<a data-toggle="collapse" href="#fruitsVegetable" aria-expanded="false" aria-controls="fruitsVegetable"> {{ category.name }}</a>
+							<a href="{% url 'phanloai' %}?category={{ category.slug }}">{{ category.name }}</a>
+												
 							
-							<ul class="collapse" id="fruitsVegetable" data-toggle="collapse" aria-expanded="false" aria-controls="fruitsVegetable {{ category.id }}">
-								{% for subcategory in category.sub_categories.all %}
-								<li class="main-nav-list child"><a href="{% url 'phanloai' %}?category={{ subcategory.slug }}">{{ subcategory.name }}</a></li>
-								{% endfor %}
-							</ul>
 						</li>
 						{% endfor %}
 					</ul>
-					
-					<!-- a tuan phan loai-->
-					{% for category in categories %}
-					<div class="dropdown">
-						<button href="" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-							{{ category.name }}
-						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ category.id }}">
-							{% for subcategory in category.sub_categories.all %}
-								<li><a class="dropdown-item" href="{% url 'phanloai' %}?category={{ subcategory.slug }}">{{ subcategory.name }}</a></li>
-							{% endfor %}
-						</ul>
-					</div>
-					{% endfor %}
-
+					<script>
+						function toggleCollapse(event, categoryId) {
+							event.preventDefault();
+							var element = document.getElementById('collapse_' + categoryId);
+							if (element.classList.contains('show')) {
+								element.classList.remove('show');
+								element.setAttribute('aria-expanded', 'false');
+							} else {
+								element.classList.add('show');
+								element.setAttribute('aria-expanded', 'true');
+							}
+						}
+					</script>
 				</div>
 			</div>
 
@@ -74,10 +68,12 @@
                             <div class="product-details">
                                 <h6 class="card-title"><a href="{% url 'chitiet' %}?id={{ product.id }}">{{ product.name }}</a></h6>
                                 <h5 class="card-text">{{ product.price|floatformat:0 }} VND</h5>
+
                                 <div class="prd-bottom">
-                                    <a href="" class="social-info">
+                                    <input type="hidden" class="quantity-input" value="1">
+									<a  data-product={{product.id}}  data-action="addProduct"  class="social-info addProductDeltail ">
                                         <span class="ti-bag"></span>
-                                        <p class="hover-text">Giỏ hàng</p>
+                                        <p class="hover-text">Thêm vào Giỏ</p>
                                     </a>
                                     <a href="{% url 'chitiet' %}?id={{ product.id }}" class="social-info">
                                         <span class="lnr lnr-move"></span>

@@ -48,12 +48,10 @@
 		</div>
 	</div>
 
-    
-
-
+ 
 	<section class="owl-carousel active-product-area section_gap">
 		<!-- single product slide -->
-		<div class="single-product-slider">
+		<div class="recent-product-slider">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-6 text-center">
@@ -67,25 +65,26 @@
 					{% for product in recent_products %}
 					<div class="col-lg-3 col-md-6">
 						<div class="single-product">
+
 							<img class="img-fluid" src="{{ product.ImageURL }}" alt="">
+
 							<div class="product-details">
 								<h6>{{ product.name }}</h6>
 								<div class="price">
-									<h6>{{ product.price }}</h6>
-									<h6 class="l-through">{{ product.price_sale }}</h6>
+									<h6>  {{ product.price_sale }}</h6>
+									<h6 class="l-through">{{ product.price }}</h6>
 								</div>
 								<div class="prd-bottom">
-
-									<a href="" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a>
-									
-									<a href="{% url 'chitiet' %}?id={{ product.id }}" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
-								</div>
+                                    <input type="hidden" class="quantity-input" value="1">
+									<a  data-product={{product.id}}  data-action="addProduct"  class="social-info addProductDeltail ">
+                                        <span class="ti-bag"></span>
+                                        <p class="hover-text">Thêm vào Giỏ</p>
+                                    </a>
+                                    <a href="{% url 'chitiet' %}?id={{ product.id }}" class="social-info">
+                                        <span class="lnr lnr-move"></span>
+                                        <p class="hover-text">Chi tiết</p>
+                                    </a>
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -94,140 +93,48 @@
 			</div>
 		</div>
 		<!-- single product slide -->
-		<div class="single-product-slider">
+		<div class="view-product-slider">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-6 text-center">
 						<div class="section-title">
-							<h1>Sản phẩm bán chạy</h1>
+							<h1>Nhiều Lượt Xem</h1>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<!-- single product -->
+					{% for product in view_products %}
 					<div class="col-lg-3 col-md-6">
 						<div class="single-product">
-							<img class="img-fluid" src="img/product/p6.jpg" alt="">
+
+							<img class="img-fluid" src="{{ product.ImageURL }}" alt="">
 							<div class="product-details">
-								<h6>addidas New Hammer sole
-									for Sports person</h6>
+								<h6>{{ product.name }}</h6>
 								<div class="price">
-									<h6>$150.00</h6>
-									<h6 class="l-through">$210.00</h6>
+									<h6>  {{ product.price_sale }}</h6>
+									<h6 class="l-through">{{ product.price }}</h6>
 								</div>
+
 								<div class="prd-bottom">
-
-									<a href="" class="social-info">
-										<span class="ti-bag"></span>
-										<p class="hover-text">Thêm vào Giỏ hàng</p>
-									</a>
-									<a href="{% url 'chitiet' %}?id={{ product.id }}" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</section>
-
-
-
-    <div class="centered">
-        <h2> Sản phẩm </h2>
-    </div>
-	<style>
-        .centered {
-          text-align: center; /* Căn giữa văn bản ngang */
-        }
-    </style>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="row">
-                    {% for product in page.object_list %}
-                    <div class="col-lg-3 col-md-6">
-                        <div class="single-product">
-                            <img class="img-fluid" src="{{ product.ImageURL }}" class="card-img-top" alt="{{ product.name }}">
-                            <div class="product-details">
-                                <h6 class="card-title"><a href="{% url 'chitiet' %}?id={{ product.id }}">{{ product.name }}</a></h6>
-                                <h5 class="card-text">{{ product.price|floatformat:0 }} VND</h5>
-                                <div class="prd-bottom">
-                                    <a href="" class="social-info">
+                                    <input type="hidden" class="quantity-input" value="1">
+									<a  data-product={{product.id}}  data-action="addProduct"  class="social-info addProductDeltail ">
                                         <span class="ti-bag"></span>
-                                        <p class="hover-text">Giỏ hàng</p>
-                                    </a>
-                                    <a href="" class="social-info">
-                                        <span class="lnr lnr-heart"></span>
-                                        <p class="hover-text">Yêu thích</p>
+                                        <p class="hover-text">Thêm vào Giỏ</p>
                                     </a>
                                     <a href="{% url 'chitiet' %}?id={{ product.id }}" class="social-info">
                                         <span class="lnr lnr-move"></span>
                                         <p class="hover-text">Chi tiết</p>
                                     </a>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% if forloop.counter|divisibleby:4 %}
-                    </div>
-                    <div class="row">
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container">
-        <div class="row justify-content-center">
-            <ul class="d-flex">
-                {% if page.has_previous %}
-                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; Trang đầu</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ page.previous_page_number }}">Trang trước</a></li>
-                {% endif %}
-    
-                {% for num in page.paginator.page_range %}
-                    <li class="page-item {% if num == page.number %}active{% endif %}">
-                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                    </li>
-                {% endfor %}
-    
-                {% if page.has_next %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page.next_page_number }}">Trang sau</a></li>
-                    <li class="page-item"><a class="page-link" href="?page={{ page.paginator.num_pages }}">Trang cuối &raquo;</a></li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-<style>
-    .pagination {
-        display: flex;
-        justify-content: center;
-        list-style: none;
-    }
-
-    .page-item {
-        margin: 0 5px;
-    }
-
-    .page-item.active a {
-        background-color: #007bff;
-        color: #fff;
-    }
-
-    .page-link {
-        text-decoration: none;
-        padding: 5px 10px;
-        border: 1px solid #007bff;
-        border-radius: 5px;
-        color: #007bff;
-    }
-</style>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
 
 
 

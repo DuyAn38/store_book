@@ -34,14 +34,15 @@ class Product(models.Model):
     name = models.CharField(max_length=200, null=True)                                  
     category = models.ManyToManyField(Category, related_name='product_category')
     price = models.IntegerField(null=False,default=0)
-    price_sale = models.IntegerField(null=False,default=0)
-    describe = models.CharField(max_length=300, null=True)
+    price_sale = models.IntegerField(null=True,default=0)
+    describe = models.CharField(max_length=2000, null=True)
     image = models.ImageField(null=True, blank=True)       
     author = models.CharField(max_length=200, null=True)
     numberofpages = models.IntegerField(null=False,default=0)
     publisher = models.CharField(max_length=300, null=True, blank=False)
     publishingyear = models.IntegerField(default=0, null=False, blank=False) 
     count = models.IntegerField(null=False, default=0)
+    view = models.IntegerField(null=False, default=0)
     time = models.DateTimeField(auto_now_add=True, blank=True, null= True)
     @property
     def ImageURL(self):

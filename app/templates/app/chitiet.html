@@ -22,7 +22,8 @@
 						<h2>{{products.price | floatformat}} Đ</h2>
 						<ul class="list">
 							
-							<li><a href="#"><span>Tác Giả</span> : In Stock</a></li>
+							<li><a href="#"><span>Tác Giả</span> {{ products.author }}</a></li>
+							<li><a href="#"><span>Nhà Xuất Bản</span> {{ products.publisher }}</a></li>
 							
 
 						</ul>
@@ -128,12 +129,22 @@
 						<table class="table">
 							<tbody>
 
+								
+								<tr>
+									<td>
+										<h5>Tác Giả</h5>
+									</td>
+									<td>
+										<h5>{{ products.author }}</h5>
+									</td>
+								</tr>
+
 								<tr>
 									<td>
 										<h5>Nhà xuất bản</h5>
 									</td>
 									<td>
-										<h5>128mm</h5>
+										<h5>{{ products.publisher }}</h5>
 									</td>
 								</tr>
 
@@ -142,16 +153,7 @@
 										<h5>Năm xuất bản</h5>
 									</td>
 									<td>
-										<h5>508mm</h5>
-									</td>
-								</tr>
-
-								<tr>
-									<td>
-										<h5>Hình thức bìa</h5>
-									</td>
-									<td>
-										<h5>508mm</h5>
+										<h5>{{ products.publishingyear }}</h5>
 									</td>
 								</tr>
 
@@ -160,19 +162,11 @@
 										<h5>Số trang</h5>
 									</td>
 									<td>
-										<h5>508mm</h5>
+										<h5>{{ products.numberofpages }}</h5>
 									</td>
 								</tr>
 
-								<tr>
-									<td>
-										<h5>Trọng lượng (gr)</h5>
-									</td>
-									<td>
-										<h5>508mm</h5>
-									</td>
-								</tr>
-
+								
 								<tr>
 									<td>
 										<h5>Ngôn Ngữ</h5>
@@ -181,8 +175,6 @@
 										<h5>Tiếng Việt</h5>
 									</td>
 								</tr>
-
-								
 							</tbody>
 						</table>
 					</div>

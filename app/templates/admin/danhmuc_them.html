@@ -21,7 +21,6 @@
 <body>
   <div class="container mt-4" style="width: 550px">
     <h2 class="mb-4">Thêm danh mục sản phẩm</h2>
-    
     <form method="POST" action="" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-group">
@@ -32,6 +31,18 @@
         <label for="categoryDescription">Đường Dẫn</label>
         {{ form.slug }}
       </div>
+
+      <div class="form-group">
+        <label for="categoryName">Danh Mục:</label>
+        {{ form.sub_category }}
+      </div>
+        <div class="form-group">
+        <label for="categoryDescription">Danh Mục Con: </label>
+        {{ form.is_sub }}
+      </div>
+
+
+
       <div class="button-group">
         <button type="submit" class="btn btn-primary">Thêm danh mục</button>
         <a href="{% url 'danhmuc' %}" class="btn btn-secondary">Quay lại</a> 

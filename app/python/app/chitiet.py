@@ -24,10 +24,12 @@ def chitiet(request):
         user_not_login = "none"
         user_login = "show"
         for item in items:
-            print(item)
-            item.total = item.product.price * item.quantity
-            total_all += item.product.price * item.quantity
-            count += item.quantity
+            if item.product is not None and hasattr(item.product, 'price'):
+                item.total = item.product.price * item.quantity
+                total_all += item.product.price * item.quantity
+                count += item.quantity
+            else:
+                item.total = 0
     else:
         items = []
         user_not_login = "show"
@@ -35,6 +37,8 @@ def chitiet(request):
     id = request.GET.get('id', '') # lấy id khi người dùng Click vào sản phẩm nào đó
     user = request.user
     products = get_object_or_404(Product, id=id)
+    products.view += 1
+    products.save()
     categories_product = products.category.values_list('id', flat=True)
     # Lấy danh sách tên danh mục từ danh sách ID
     category_names = Category.objects.filter(id__in=categories_product).values_list('name', flat=True)

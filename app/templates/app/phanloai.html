@@ -9,26 +9,30 @@
 			<div class="sidebar-categories">
 				<div class="head">Phân Loại Sách</div>
 				
-				{% comment %} <ul class="main-categories">						
-					<li class="main-nav-list"><a data-toggle="collapse" href="#meatFish" aria-expanded="false" aria-controls="meatFish"><span>
-						{% for category in categories %}
-								<li class="nav-item"> <a class="nav-link" href="{% url 'phanloai' %}?category={{ category.slug }}">{{ category.name }} </a></li>
-						{% endfor %}
-					</li>
-				</ul> {% endcomment %}
 
-				{% for category in categories %}
-				<div class="dropdown">
-					<button href="" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-						{{ category.name }}
-					</button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ category.id }}">
-						{% for subcategory in category.sub_categories.all %}
-							<li><a class="dropdown-item" href="{% url 'phanloai' %}?category={{ subcategory.slug }}">{{ subcategory.name }}</a></li>
-						{% endfor %}
-					</ul>
-				</div>
-				{% endfor %}
+				<ul class="main-categories">
+					{% for category in categories %}                    
+					<li class="main-nav-list">
+						<a href="{% url 'phanloai' %}?category={{ category.slug }}">{{ category.name }}</a>
+											
+						
+					</li>
+					{% endfor %}
+				</ul>
+				<script>
+					function toggleCollapse(event, categoryId) {
+						event.preventDefault();
+						var element = document.getElementById('collapse_' + categoryId);
+						if (element.classList.contains('show')) {
+							element.classList.remove('show');
+							element.setAttribute('aria-expanded', 'false');
+						} else {
+							element.classList.add('show');
+							element.setAttribute('aria-expanded', 'true');
+						}
+					}
+				</script>
+
 			</div>
 		</div>
 		
@@ -62,9 +66,10 @@
 							<h6 class="card-title"><a href="{% url 'chitiet' %}?id={{ product.id }}">{{ product.name }}</a></h6>
 							<h5 class="card-text">{{ product.price|floatformat:0 }} VND</h5>
 							<div class="prd-bottom">
-								<a href="" class="social-info">
+								<input type="hidden" class="quantity-input" value="1">
+								<a  data-product={{product.id}}  data-action="addProduct"  class="social-info addProductDeltail ">
 									<span class="ti-bag"></span>
-									<p class="hover-text">Giỏ hàng</p>
+									<p class="hover-text">Thêm vào Giỏ</p>
 								</a>
 								<a href="{% url 'chitiet' %}?id={{ product.id }}" class="social-info">
 									<span class="lnr lnr-move"></span>
