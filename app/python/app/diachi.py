@@ -113,18 +113,10 @@ def suadiachi(request):
                }
     return render(request, 'app/suadiachi.html', context)
 
-def xoadiachi(request):
-    check_staff = request.user
-    if check_staff.is_staff:
-        print('admin')
-        show_manage = 'show'
-    else:
-        print('not admin')
-        show_manage = 'none'
-    id = request.GET.get('id', '')  # lấy id khi người dùng click vào sản phẩm nào đó
-    address = get_object_or_404(Adress, id=id)
-    if request.method == 'POST':
-        address.delete()
-        return redirect('thongtincanhan')
-    context = {}
-    return render(request, 'app/xoadiachi.html', context)
+
+def xoadiachi(request, id):
+    order = get_object_or_404(Adress, id=id)
+    order.delete()
+    messages.warning(request, 'xóa địa chỉ thành công')
+    return redirect('thongtincanhan')
+

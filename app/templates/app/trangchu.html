@@ -71,8 +71,8 @@
 							<div class="product-details">
 								<h6>{{ product.name }}</h6>
 								<div class="price">
-									<h6>  {{ product.price_sale }}</h6>
-									<h6 class="l-through">{{ product.price }}</h6>
+									<h6>  {{ product.price }}</h6>
+									{% comment %} <h6 class="l-through">{{ product.price_sale }}</h6> {% endcomment %}
 								</div>
 								<div class="prd-bottom">
                                     <input type="hidden" class="quantity-input" value="1">
@@ -112,8 +112,8 @@
 							<div class="product-details">
 								<h6>{{ product.name }}</h6>
 								<div class="price">
-									<h6>  {{ product.price_sale }}</h6>
-									<h6 class="l-through">{{ product.price }}</h6>
+									<h6> {{ product.price }} </h6>
+									{% comment %} <h6 class="l-through">{{ product.price_sale }}</h6> {% endcomment %}
 								</div>
 
 								<div class="prd-bottom">

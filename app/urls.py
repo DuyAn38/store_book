@@ -31,7 +31,7 @@ urlpatterns = [
     path('suathongtincanhan/', views.suathongtincanhan , name="suathongtincanhan" ),
     path('themdiachi/', views.themdiachi , name="themdiachi" ),
     path('suadiachi/', views.suadiachi , name="suadiachi" ),
-    path('xoadiachi/', views.xoadiachi , name="xoadiachi" ),
+    path('xoadiachi/<int:id>/', views.xoadiachi , name="xoadiachi" ),
     path('doimatkhau/', views.doimatkhau , name="doimatkhau" ),
     
 
