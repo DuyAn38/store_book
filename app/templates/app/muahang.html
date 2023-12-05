@@ -4,6 +4,41 @@
 {% block muahang %}
 <div class="container">
     <div class="row" style="width:100%">
+        <div class="col-md-7">
+            <div class="box-element">
+                <h3>Hóa đơn</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Ảnh</th>
+                            <th>Sản phẩm</th>
+                            <th>Size</th>
+                            <th>Đơn Giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in items %}
+                        <tr>
+                            <td><img style="height: 80px; width: auto;" src="{{ item.product.ImageURL }}" /></td>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.size }}</td>
+                            <td>{{ item.product.price|floatformat:0 }} VND</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.total|floatformat:0 }} VND</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="text-right">
+                    <h4>Tổng cộng: {{ total_all|floatformat:0 }} VND</h4>
+                </div>
+                <!-- Thêm phần tử để hiển thị phương thức giao hàng -->
+                <div id="shipping-method-section"></div>
+            </div>
+        </div>
+
         <div class="col-md-5">
             <div class="box-element" id="form-wrapper">
                 <form id="form" method="POST" action="">
@@ -43,40 +78,7 @@
             </div>
         </div>
 
-        <div class="col-md-7">
-            <div class="box-element">
-                <h3>Hóa đơn</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Ảnh</th>
-                            <th>Sản phẩm</th>
-                            <th>Size</th>
-                            <th>Đơn Giá</th>
-                            <th>Số lượng</th>
-                            <th>Thành tiền</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in items %}
-                        <tr>
-                            <td><img style="height: 80px; width: auto;" src="{{ item.product.ImageURL }}" /></td>
-                            <td>{{ item.product.name }}</td>
-                            <td>{{ item.size }}</td>
-                            <td>{{ item.product.price|floatformat:0 }} VND</td>
-                            <td>{{ item.quantity }}</td>
-                            <td>{{ item.total|floatformat:0 }} VND</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <div class="text-right">
-                    <h4>Tổng cộng: {{ total_all|floatformat:0 }} VND</h4>
-                </div>
-                <!-- Thêm phần tử để hiển thị phương thức giao hàng -->
-                <div id="shipping-method-section"></div>
-            </div>
-        </div>
+
     </div>
 </div>
 

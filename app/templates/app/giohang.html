@@ -37,11 +37,11 @@
                             <td>
                                 <div class="d-flex">
                                     <span class="input-group-btn">
-                                        <button data-product="{{ item.product.id }}" data-action="remove"  class=" update-btn btn btn-outline-secondary reduce-btn" type="button"><i class="fas fa-minus"></i></button>
+                                        <button data-product="{{ item.product.id }}" data-action="remove"  class=" update-btn btn btn-outline-secondary reduce-btn" type="button">-</button>
                                     </span>
                                     <input style="width:60px" stype="text" class="form-control text-center" value="{{ item.quantity }}">
                                     <span class="input-group-btn">
-                                        <button data-product="{{ item.product.id }}" data-action="add"  class=" update-btn btn btn-outline-secondary increase-btn" type="button"><i class="fas fa-plus"></i></button>
+                                        <button data-product="{{ item.product.id }}" data-action="add"  class=" update-btn btn btn-outline-secondary increase-btn" type="button">+</button>
                                     </span>
                                 </div>
                             </td>
